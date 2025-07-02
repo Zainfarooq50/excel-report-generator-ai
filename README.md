@@ -25,7 +25,7 @@ This Python project generates detailed Excel reports from sales data, complete w
 ---
 
 ## 🚀 How to Use
-1. Ensure your OpenAI API key is configured inside `GPT_utils_excel.py`  
+1. Paste your OPENAI key in .env file.  
 2. Prepare your sales CSV file with columns: `Name`, `City`, `Sales`  
 3. Run the script:  
    ```bash
