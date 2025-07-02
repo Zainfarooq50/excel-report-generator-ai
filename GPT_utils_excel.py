@@ -1,0 +1,31 @@
+import requests
+from config import api_key
+
+
+# ---------------- AI Insights Function ----------------
+def get_ai_insights(summary_text):
+    """
+    Sends report summary to OpenAI API and returns professional insights.
+    """
+    url = "https://api.openai.com/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+            {"role": "system", "content": "You analyze sales reports and provide concise, actionable insights."},
+            {"role": "user", "content": f"Generate insightful points for this report:\n{summary_text}"}
+        ],
+        "max_tokens": 300
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        result = response.json()
+        return result["choices"][0]["message"]["content"].strip()
+    except Exception as e:
+        print(f"❌ AI Error: {e}")
+        return "AI could not generate insights."
